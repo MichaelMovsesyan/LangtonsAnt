@@ -41,10 +41,13 @@ LangtonGrid init_langton_grid() {
 
 	for (int i = 0; i < WIDTH; i++) {
 		for (int j = 0; j < HEIGHT; j++) {
+
 			lgrid.grid[i][j] = SEV;
+
+
+
 		}
 	}
-
 	return lgrid;
 }
 
@@ -76,6 +79,10 @@ void draw_langton_grid(LangtonGrid* lgrid, int start_x, int start_y) {
 	}
 }
 
+struct Ant {
+	int x, y;
+	int dir;
+};
 
 // 0 = up, 1 = left, 2 = down, 3 = right
 void turn_left(Ant* ant) {	
@@ -91,7 +98,6 @@ void turn_left(Ant* ant) {
 	else if (ant->dir == 3) {
 		ant->dir = 0;
 	}
-
 }
 
 
@@ -141,12 +147,12 @@ void move_forward(Ant* ant) {
 	else if (ant->dir == 3) {
 		if (ant->x == WIDTH - 1) {
 			ant->x = 0;
-		}
-		else {
+			}
+			else {
 			ant->x += 1;
 		}
 	}
-}
+				}
 
 
 
@@ -154,14 +160,14 @@ void update_langton_grid(LangtonGrid* lgrid, Ant* ant) {
 	bool current_cell = lgrid->grid[ant->x][ant->y];
 	if (current_cell == SPITAK) {
 		turn_right(ant);
-	}
+			}
 	else {
 		turn_left(ant);
-	}
+		}
 	lgrid->grid[ant->x][ant->y] = !current_cell;
 	move_forward(ant);
 
-}
+	}
 
 
 
